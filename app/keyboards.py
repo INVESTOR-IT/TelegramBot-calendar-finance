@@ -6,12 +6,11 @@ button_help = ReplyKeyboardMarkup(keyboard=[
     resize_keyboard=True, input_field_placeholder='Выберите пункт меню...')
 
 button_help_tg = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Перейти к тех поддержке', url='https://t.me/IEEE934')]
-])
+    [InlineKeyboardButton(text='Перейти к тех поддержке', url='https://t.me/IEEE934')]])
 
-button_registration = InlineKeyboardMarkup(inline_keyboard=[[
-    InlineKeyboardButton(text='Регистрация', callback_data='registration')
-]])
+button_authorization_registration = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Войти', callback_data='authorization')],
+    [InlineKeyboardButton(text='Регистрация', callback_data='registration')]])
 
 button_object_help_profile = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text='Объекты'), KeyboardButton(text='Помощь')],

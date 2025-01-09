@@ -6,6 +6,7 @@ from aiogram import Bot, Dispatcher
 from config import TOKEN
 from app.handlers import handlers
 from app.registration import registration
+from app.authorization import authorization
 
 
 bot = Bot(token=TOKEN)
@@ -15,6 +16,7 @@ dp = Dispatcher()
 async def main():
     dp.include_router(handlers)
     dp.include_router(registration)
+    dp.include_router(authorization)
     await dp.start_polling(bot)
 
 if __name__ == '__main__':

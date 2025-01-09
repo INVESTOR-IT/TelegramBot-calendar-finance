@@ -11,7 +11,7 @@ handlers = Router()
 @handlers.message(CommandStart())
 async def start(message: Message):
     await message.answer('Добро пожаловать в календарь', reply_markup=kb.button_help)
-    await message.answer('Что бы добавить свои объекты, нужно зарегистрироваться', reply_markup=kb.button_registration)
+    await message.answer('Что бы добавить свои объекты, нужно зарегистрироваться', reply_markup=kb.button_authorization_registration)
 
 
 @handlers.message(F.text == 'Помощь')
