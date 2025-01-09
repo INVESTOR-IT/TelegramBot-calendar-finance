@@ -5,6 +5,7 @@ from aiogram.fsm.context import FSMContext
 
 import app.keyboards as kb
 import app.check as check
+import hash_password as hs
 
 registration = Router()
 
@@ -35,13 +36,12 @@ async def registration_two(message: Message, state: FSMContext):
 async def registration_three(message: Message, state: FSMContext):
     answer_check = await check.check_password(message.text)
     if answer_check == True:
-        print('check-func: True')
         await message.answer('Сохраните свой пароль!')
-        await state.update_data(password=message.text)
+        await state.update_data(password=await hs.hash_password(message.text))
         data = await state.get_data()
         await message.answer('Регистрация успешно завершена', reply_markup=kb.button_object_help_profile)
         await state.clear()
         await message.answer('Для работы с вашими объектами нужно их добавить', reply_markup=kb.button_new_object)
+        print(data)
     else:
-        print('check-func: False')
         await message.answer(f'Введен некоректный пароль\n{answer_check}\nПовторите попытку')

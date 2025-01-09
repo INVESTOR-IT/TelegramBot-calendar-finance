@@ -35,4 +35,5 @@ async def authorization_two(message: Message, state: FSMContext):
 async def authorization_three(message: Message, state: FSMContext):
     await state.update_data(password=message.text)
     data = await state.get_data()
+    await state.clear()
     await message.answer('Вы успешно вошли', reply_markup=kb.button_object_help_profile)

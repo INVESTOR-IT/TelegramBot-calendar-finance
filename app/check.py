@@ -10,7 +10,6 @@ async def check_login(login: str) -> bool:
 
 
 async def check_password(password: str) -> bool | str:
-    print('check-func')
     if len(password) < 8:
         return 'Пароль состоит меньше 8 символов'
     if not search(r'[A-Z]', password):
