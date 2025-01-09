@@ -23,10 +23,10 @@ async def authorization_one(callback: CallbackQuery, state: FSMContext):
 
 @authorization.message(Authorization.login)
 async def authorization_two(message: Message, state: FSMContext):
-    if check.check_login(message.text):
+    if await check.check_login(message.text):
         await state.update_data(login=message.text)
         await state.set_state(Authorization.password)
-        await message.answer('Введите свой пароль')
+        await message.answer('Отлично! Введите свой пароль')
     else:
         await message.answer('Введена некоректная почта\nПовторите попытку')
 

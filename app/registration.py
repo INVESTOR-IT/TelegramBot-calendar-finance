@@ -42,6 +42,5 @@ async def registration_three(message: Message, state: FSMContext):
         await message.answer('Регистрация успешно завершена', reply_markup=kb.button_object_help_profile)
         await state.clear()
         await message.answer('Для работы с вашими объектами нужно их добавить', reply_markup=kb.button_new_object)
-        print(data)
     else:
         await message.answer(f'Введен некоректный пароль\n{answer_check}\nПовторите попытку')
