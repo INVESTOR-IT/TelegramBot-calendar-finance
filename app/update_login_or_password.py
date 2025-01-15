@@ -18,6 +18,8 @@ class Update_password(StatesGroup):
     password = State()
 
 
+#########################################################################################
+# Смена логина
 @update_login_or_password.callback_query(F.data == 'update email')
 async def update_login_one(callback: CallbackQuery, state: FSMContext):
     await callback.answer('Смена логина')
@@ -35,7 +37,8 @@ async def update_login_two(message: Message, state: FSMContext):
     else:
         await message.answer('Введена некоректная почта\nПовторите попытку')
 
-
+#########################################################################################
+# Смена пароля
 @update_login_or_password.callback_query(F.data == 'new password')
 async def new_password_one(callback: CallbackQuery, state: FSMContext):
     await callback.answer('Смена пароля')

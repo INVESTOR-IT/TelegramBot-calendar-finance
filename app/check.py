@@ -1,6 +1,8 @@
 from re import search
 
 
+#########################################################################################
+# Проверка почты от дурака
 async def check_login(login: str) -> bool:
     try:
         login.split('@')[1].index('.')
@@ -8,7 +10,8 @@ async def check_login(login: str) -> bool:
         return False
     return True
 
-
+#########################################################################################
+# Проверка пароля от дурака
 async def check_password(password: str) -> bool | str:
     if len(password) < 8:
         return 'Пароль состоит меньше 8 символов'
