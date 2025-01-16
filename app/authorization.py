@@ -16,10 +16,9 @@ class Authorization(StatesGroup):
     login = State()
     password = State()
 
+
 #########################################################################################
 # Авторизация пользователя
-
-
 @authorization.callback_query(F.data == 'authorization')
 async def authorization_one(callback: CallbackQuery, state: FSMContext):
     await callback.answer('Начало авторизации')
@@ -35,8 +34,8 @@ async def authorization_two(message: Message, state: FSMContext):
             await state.set_state(Authorization.password)
             await message.answer('Отлично! Введите свой пароль')
         else:
-            await message.answer('С такой почтой данного пользователя нет\n' \
-                                 'Проверьте корректность введенной почты и повторите попытку или зарегистрируйтесь', 
+            await message.answer('С такой почтой данного пользователя нет\n'
+                                 'Проверьте корректность введенной почты и повторите попытку или зарегистрируйтесь',
                                  reply_markup=kb.button_authorization_registration)
     else:
         await message.answer('Введена некоректная почта\nПовторите попытку')
@@ -52,5 +51,5 @@ async def authorization_three(message: Message, state: FSMContext):
         config.USER = sql.select(f"SELECT id FROM User WHERE email = '{data_user['login']}'")[0]['id']
         await message.answer('Вы успешно вошли', reply_markup=kb.button_object_help_profile)
     else:
-        await message.answer('Пароль введен не верно, повторите попытку и проверьте почту', 
+        await message.answer('Пароль введен не верно, повторите попытку и проверьте почту',
                              reply_markup=kb.button_authorization_registration)

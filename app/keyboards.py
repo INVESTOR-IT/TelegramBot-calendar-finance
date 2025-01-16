@@ -40,3 +40,12 @@ button_new_object = InlineKeyboardMarkup(inline_keyboard=[
 button_update_profile = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Изменить почту', callback_data='update email')],
     [InlineKeyboardButton(text='Изменить пароль', callback_data='new password')]])
+
+
+#########################################################################################
+# Кнопки типов объекта
+button_type_object = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text='Студия'), KeyboardButton(text='Загородный дом')],
+    [KeyboardButton(text='1 комнатная квартира'), KeyboardButton(text='Евродвушка')],
+    [KeyboardButton(text='2 комнатная квартира'), KeyboardButton(text='3 комнатная квартира')]],
+    resize_keyboard=True, input_field_placeholder='Выберите тип объекта...')

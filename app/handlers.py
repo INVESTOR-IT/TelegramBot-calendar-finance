@@ -19,6 +19,14 @@ async def start(message: Message):
 
 
 #########################################################################################
+# Зайти как разработчик
+@handlers.message(Command('q1'))
+async def developer(message: Message):
+    config.USER = 1
+    await message.answer('Вошел как разраб', reply_markup=kb.button_object_help_profile)
+
+
+#########################################################################################
 # Помощь
 @handlers.message(F.text == 'Помощь')
 async def help(message: Message):
@@ -29,26 +37,24 @@ async def help(message: Message):
 # Все объекты пользователя
 @handlers.message(F.text == 'Объекты')
 async def objects(message: Message):
-    await message.answer('Нет запроса')
+    name_objects = sql.select("SELECT name_object FROM Objects "
+                              f"WHERE id_user = '{config.USER}'")
+    print(name_objects)
+    if name_objects:
+        await message.answer('Ваши объекты')
+    else:
+        await message.answer('У вас нет объектов', reply_markup=kb.button_new_object)
 
 
 #########################################################################################
 # Профиль пользователя
 @handlers.message(F.text == 'Профиль')
 async def profile(message: Message):
-    info_user = sql.select("SELECT User.id, email, COUNT(Objects.id) as count, data_registration FROM User " \
-                            "LEFT OUTER JOIN Objects ON User.id = Objects.id_user " \
-                            "GROUP BY User.id, email " \
-                            f"HAVING User.id = '{config.USER}'")[0]
-    
-    await message.answer(f"Дата регистрации: {info_user['data_registration']}\n" \
-                         f"Ваша почта: {info_user['email']}\n\n" \
+    info_user = sql.select("SELECT User.id, email, COUNT(Objects.id) as count, data_registration FROM User "
+                           "LEFT OUTER JOIN Objects ON User.id = Objects.id_user "
+                           "GROUP BY User.id, email "
+                           f"HAVING User.id = '{config.USER}'")[0]
+
+    await message.answer(f"Дата регистрации: {info_user['data_registration']}\n"
+                         f"Ваша почта: {info_user['email']}\n\n"
                          f"Количество объектов: {info_user['count']}", reply_markup=kb.button_update_profile)
-
-
-#########################################################################################
-# Новый объект пользователя
-@handlers.callback_query(F.data == 'new object')
-async def new_object(callback: CallbackQuery):
-    await callback.answer('Добавляем новый объект')
-    await callback.message.answer('_/O\_')

@@ -17,10 +17,9 @@ class Registration(StatesGroup):
     login = State()
     password = State()
 
+
 #########################################################################################
 # Регистрация пользователя
-
-
 @registration.callback_query(F.data == 'registration')
 async def registration_one(callback: CallbackQuery, state: FSMContext):
     await callback.answer('Начало регистрации')
