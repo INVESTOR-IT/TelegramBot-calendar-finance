@@ -39,3 +39,6 @@ def insert(sql: str) -> None:
             connect.commit()
     finally:
         connect.close()
+
+
+update = insert
