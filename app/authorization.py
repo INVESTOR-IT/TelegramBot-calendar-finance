@@ -49,7 +49,7 @@ async def authorization_three(message: Message, state: FSMContext):
     data = sql.select(f"SELECT * FROM User WHERE email = '{data_user['login']}'")[0]
     if data['hash_password'] == await hs.hash_password(data_user['password']):
         config.USER = sql.select(f"SELECT id FROM User WHERE email = '{data_user['login']}'")[0]['id']
-        await message.answer('Вы успешно вошли', reply_markup=kb.button_object_help_profile)
+        await message.answer('Вы успешно вошли', reply_markup=kb.button_object_calendar_help_profile)
     else:
         await message.answer('Пароль введен не верно, повторите попытку и проверьте почту',
                              reply_markup=kb.button_authorization_registration)

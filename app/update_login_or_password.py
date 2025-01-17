@@ -39,7 +39,8 @@ async def update_login_two(message: Message, state: FSMContext):
         sql.update("UPDATE User "
                    f"SET email = '{login['login']}' "
                    f"WHERE id = {config.USER}")
-        await message.answer('Почта успешно обновлена!', reply_markup=kb.button_object_help_profile)
+        await message.answer('Почта успешно обновлена!',
+                             reply_markup=kb.button_object_calendar_help_profile)
     else:
         await message.answer('Введена некоректная почта\nПовторите попытку')
 
@@ -65,6 +66,8 @@ async def new_password_two(message: Message, state: FSMContext):
         sql.update("UPDATE User "
                    f"SET hash_password = '{password['password']}' "
                    f"WHERE id = {config.USER}")
-        await message.answer('Пароль успешно обновлен', reply_markup=kb.button_object_help_profile)
+        await message.answer('Пароль успешно обновлен',
+                             reply_markup=kb.button_object_calendar_help_profile)
     else:
-        await message.answer(f'Введен некоректный пароль\n{answer_check}\nПовторите попытку')
+        await message.answer(f'Введен некоректный пароль\n{answer_check}\n'
+                             'Повторите попытку')

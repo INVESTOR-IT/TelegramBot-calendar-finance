@@ -59,4 +59,4 @@ async def new_object_name(message: Message, state: FSMContext):
     await state.clear()
     sql.insert("INSERT INTO Objects (id, id_user, type_objects, address, name_object)"
                f"VALUES (NULL, {config.USER}, '{data_object['type_objects']}', '{data_object['address']}', '{data_object['name_object']}')")
-    await message.answer('Готово! Теперь ваш объект можно выбрать в календаре', reply_markup=kb.button_object_help_profile)
+    await message.answer('Готово! Ваш объект добавлен', reply_markup=kb.button_object_calendar_help_profile)
